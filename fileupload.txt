@@ -1,0 +1,16 @@
+File upload vulnerability:
+ 1) Try to change the image file name by a shell in proxy tab
+ 
+ 2)Try to change the request header "Content-Type" with acceptable type such as image/jpeg or image/png 
+ 
+ 3)Path Traversal:When you upload a shell as an image file but your shell is not working rather it shows the shell content then use path traversal method in "Content-Disposition" header (use various technique such as url encoding etc)
+ 
+ 4)Try to upload a file if server doesn't allow  to upload a shell then research for why is not allowing it.And also search for  which server is running,search in google for a vulnerability of that particular version of that server.
+ 
+ 5)If the web server only allow jpg and png file then in header "Content-Disposition"  try to change the filename  with url encoded null byte followed by jpg or png such as filename="exploit.php%00.jpg"
+ 
+ 6)We can use php code as a meta data for that we need one image file and exiftool.The syntax of that :
+ exiftool -Comment="<?php echo 'START ' . file_get_contents('/home/folder/secret') . ' END'; ?>" <YOUR-INPUT-IMAGE>.jpg -o polyglot.php
+ note:change the php content as you need.
+ 
+ For better understanding solve portswigger labs
